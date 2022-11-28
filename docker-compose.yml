@@ -16,4 +16,12 @@ services:
       - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       - 80:80
-  
+  mitmproxy:
+    build:
+      context: mitmproxy
+    volumes:
+      - ./mitmproxy/scripts:/scripts
+    working_dir: /scripts
+    command: mitmdump --listen-port 8888 -s sleep_response.py
+    ports:
+      - 8888:8888
