@@ -1,9 +1,7 @@
 from time import sleep
-from urllib.parse import urlparse
+from mitmproxy import http
 
-def responseheaders(flow):
-  def modify(chunks):
-        sleep(3)
-        # continue to stream original response
-        yield from chunks
-  flow.response.stream = modify
+
+def response(flow: http.HTTPFlow) -> None:
+  sleep(3)
+  
