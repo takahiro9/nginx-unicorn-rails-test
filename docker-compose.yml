@@ -1,8 +1,7 @@
 version: '3'
 services:
   rails:
-    build:
-      context: rails
+    image: ruby:3.1.3
     volumes:
       - ./rails/nginx-unicorn-rails-test:/app
     working_dir: /app
@@ -10,18 +9,14 @@ services:
     ports:
       - 8080:8080
   nginx:
-    build:
-      context: nginx
+    image: nginx:1.23.2
     volumes:
       - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       - 80:80
-  mitmproxy:
-    build:
-      context: mitmproxy
+  toxiproxy:
+    image: shopify/toxiproxy:2.1.4
     volumes:
-      - ./mitmproxy/scripts:/scripts
-    working_dir: /scripts
-    command: mitmdump --listen-port 8888 -s sleep_response.py
+      - ./toxiproxy/setting_proxy.sh:/setting_proxy:ro
     ports:
       - 8888:8888
