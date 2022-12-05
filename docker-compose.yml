@@ -14,9 +14,15 @@ services:
       - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       - 80:80
-  toxiproxy:
-    image: shopify/toxiproxy:2.1.4
+  squid:
+    image: ubuntu/squid:5.2-22.04_beta
     volumes:
-      - ./toxiproxy/setting_proxy.sh:/setting_proxy:ro
+      - ./squid/squid.conf:/etc/squid/squid.conf
     ports:
-      - 8888:8888
+      - 3128:3128
+  http-client:
+    image: golang:1.19.3-bullseye
+    volumes:
+      - ./http-client/scripts:/scripts
+    working_dir: /scripts
+    tty: true

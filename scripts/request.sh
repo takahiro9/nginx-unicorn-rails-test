@@ -4,7 +4,7 @@ request () {
   local proxy=${3}
   local startTime=`gdate +%s%3N`
   if [ -n "$proxy" ]; then
-    curl $url -x localhost:8888 > /dev/null 2>&1
+    curl $url -x $proxy > /dev/null 2>&1
   else
     curl $url > /dev/null 2>&1
   fi
