@@ -20,3 +20,8 @@ services:
       - ./http-client/scripts:/scripts
     working_dir: /scripts
     tty: true
+  node-http-client:
+    image: node:19-alpine
+    volumes:
+      - ./http-client/scripts:/scripts
+    tty: true
