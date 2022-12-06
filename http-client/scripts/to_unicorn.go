@@ -10,14 +10,14 @@ import (
 )
 
 func main() {
-    resp, err := http.Get("http://google.com")
+    resp, err := http.Get("http://rails:8080")
     if err != nil {
         log.Fatalf("Get failed: %v", err)
     }
     defer resp.Body.Close()
 
     // Limit to 10 bytes per second
-    wrappedIn := flowrate.NewReader(resp.Body, 10)
+    wrappedIn := flowrate.NewReader(resp.Body, 500)
 
     // Copy to stdout
     _, err = io.Copy(os.Stdout, wrappedIn)
