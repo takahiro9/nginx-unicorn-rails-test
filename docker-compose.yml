@@ -14,14 +14,3 @@ services:
       - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       - 80:80
-  http-client:
-    image: golang:1.19.3-bullseye
-    volumes:
-      - ./http-client/scripts:/scripts
-    working_dir: /scripts
-    tty: true
-  node-http-client:
-    image: node:19-alpine
-    volumes:
-      - ./http-client/scripts:/scripts
-    tty: true
